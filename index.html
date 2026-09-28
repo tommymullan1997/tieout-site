@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Tieout</title>
+<meta name="description" content="Tieout builds reporting foundations for Sage 200 companies in Northern Ireland and Ireland: board packs, Excel and dashboards that tie to your trial balance, from a warehouse you own.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#fcfcfb; --stone:#f0f0ec; --ink:#0f1112; --ink2:#4f5357; --ink3:#85898d;
+  --line:#dcdcd5; --blue:#2a78d6; --blue-ink:#1c5cab; --wash:#e6eefa; --good:#0c7a3a;
+  --card:#ffffff;
+  --sans:Manrope,"Helvetica Neue",Arial,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#111211; --stone:#1a1a19; --ink:#f4f4f0; --ink2:#c3c2b7; --ink3:#8c8b85;
+  --line:#2e2f2c; --blue:#3987e5; --blue-ink:#86b6ef; --wash:#1b2638; --good:#3fbf6f; --card:#1a1a19;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --paper:#111211; --stone:#1a1a19; --ink:#f4f4f0; --ink2:#c3c2b7; --ink3:#8c8b85;
+  --line:#2e2f2c; --blue:#3987e5; --blue-ink:#86b6ef; --wash:#1b2638; --good:#3fbf6f; --card:#1a1a19;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--blue-ink)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:24px}
+@media (max-width:480px){.wrap{padding-inline:16px}}
+h1,h2,h3{text-wrap:balance;letter-spacing:-.02em;line-height:1.12;margin:0}
+h1{font-size:clamp(34px,5.6vw,58px);font-weight:800}
+h2{font-size:clamp(26px,3.4vw,36px);font-weight:800}
+h3{font-size:18px;font-weight:700;letter-spacing:-.01em}
+p{margin:0}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
+.lede{font-size:clamp(18px,2vw,20px);color:var(--ink2);max-width:36em}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand b{font-size:22px;font-weight:800;letter-spacing:-.04em}
+.brand b span{color:var(--blue)}
+.navcta{font-size:15px;font-weight:700;text-decoration:none;color:var(--paper);background:var(--ink);padding:10px 16px;border-radius:999px;min-height:44px;display:inline-flex;align-items:center}
+
+/* hero */
+.hero{padding-block:72px 56px}
+.hero .wrap{display:grid;grid-template-columns:1.15fr 1fr;gap:48px;align-items:center}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;gap:36px}.hero{padding-block:44px 40px}}
+.hero-copy{display:flex;flex-direction:column;gap:22px}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:12px 20px;border-radius:999px;font-weight:700;font-size:16px;text-decoration:none;border:0;cursor:pointer;font-family:inherit}
+.btn.primary{background:var(--blue);color:#fff}
+.btn.primary:hover{background:var(--blue-ink);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1.5px var(--ink3)}
+
+/* tie-out card: the thesis */
+.tie{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 22px 18px;box-shadow:0 18px 40px -24px rgba(15,17,18,.35)}
+.tie-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px}
+.tie-head .t{font-weight:700;font-size:15px}
+.tie-head .d{font-size:12px;color:var(--ink3)}
+.tie table{width:100%;border-collapse:collapse;font-size:14px}
+.tie td{padding:9px 0;border-bottom:1px dashed var(--line);vertical-align:baseline}
+.tie td.v{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap;padding-left:12px}
+.tie td .s{display:block;font-size:12px;color:var(--ink3)}
+.tie tr.diff td{border-bottom:0;border-top:2px solid var(--ink);padding-top:12px;font-weight:700}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent);padding:4px 10px;border-radius:999px;font-family:var(--sans)}
+.tie-foot{margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--ink3)}
+
+/* sections */
+section.band{padding-block:72px;border-top:1px solid var(--line)}
+section.alt{background:var(--stone)}
+.sec-head{display:flex;flex-direction:column;gap:12px;margin-bottom:36px;max-width:44em}
+
+/* problem */
+.quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:860px){.quotes{grid-template-columns:1fr}}
+.q{display:flex;flex-direction:column;gap:10px;padding-top:16px;border-top:2px solid var(--ink)}
+.q p{font-size:18px;font-weight:600;letter-spacing:-.01em;line-height:1.4}
+.q small{font-size:13px;color:var(--ink3)}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:40px}
+@media (max-width:700px){.facts{grid-template-columns:1fr}}
+.fact{display:flex;gap:16px;align-items:baseline}
+.fact .n{font-family:var(--mono);font-size:30px;font-weight:500;color:var(--blue);min-width:3.2ch;font-variant-numeric:tabular-nums}
+.fact p{color:var(--ink2);font-size:16px}
+
+/* outputs */
+.outputs{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+@media (max-width:860px){.outputs{grid-template-columns:1fr}}
+.olist{display:flex;flex-direction:column}
+.o{display:grid;grid-template-columns:28px 1fr;gap:14px;padding-block:18px;border-bottom:1px solid var(--line)}
+.o:first-child{padding-top:0}
+.o svg{margin-top:3px}
+.o p{color:var(--ink2);font-size:16px;margin-top:4px}
+.shot{border-radius:10px;border:1px solid var(--line);overflow:hidden;background:var(--card)}
+.shot img{display:block;width:100%;height:auto}
+.shot figcaption{font-size:12px;color:var(--ink3);padding:10px 14px;border-top:1px solid var(--line)}
+.shots{display:flex;flex-direction:column;gap:18px}
+
+/* how */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;counter-reset:s;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card)}
+@media (max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+.step{padding:22px;display:flex;flex-direction:column;gap:8px;border-right:1px solid var(--line)}
+.step:last-child{border-right:0}
+@media (max-width:860px){.step{border-bottom:1px solid var(--line)}}
+.step .k{font-family:var(--mono);font-size:12px;color:var(--blue-ink)}
+.step p{color:var(--ink2);font-size:15px}
+.keep{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px}
+@media (max-width:700px){.keep{grid-template-columns:1fr}}
+.keep ul{margin:8px 0 0;padding-left:20px;color:var(--ink2);font-size:16px}
+.keep li{margin:4px 0}
+
+/* start */
+.offer{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:start}
+@media (max-width:860px){.offer{grid-template-columns:1fr}}
+.price{background:var(--card);border:1.5px solid var(--ink);border-radius:14px;padding:28px;display:flex;flex-direction:column;gap:14px}
+.price .amt{font-size:40px;font-weight:800;letter-spacing:-.03em}
+.price .amt small{font-size:15px;font-weight:600;color:var(--ink3);letter-spacing:0}
+.price ol{margin:0;padding-left:20px;color:var(--ink2);font-size:16px}
+.price li{margin:6px 0}
+.note{font-size:14px;color:var(--ink3)}
+.free{display:inline-flex;align-self:flex-start;font-size:13px;font-weight:700;background:var(--wash);color:var(--blue-ink);padding:6px 12px;border-radius:999px}
+.then{display:flex;flex-direction:column;gap:14px}
+.then dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 18px;font-size:16px}
+.then dt{font-weight:700;white-space:nowrap}
+.then dd{margin:0;color:var(--ink2)}
+
+/* about */
+.about{display:grid;grid-template-columns:1fr 1.3fr;gap:40px;align-items:start}
+@media (max-width:860px){.about{grid-template-columns:1fr}}
+.about p + p{margin-top:14px}
+.about p{color:var(--ink2)}
+.contact{background:var(--ink);color:var(--paper);border-radius:14px;padding:28px;display:flex;flex-direction:column;gap:16px}
+.contact h3{color:var(--paper)}
+.contact .addr{font-family:var(--mono);font-size:18px;word-break:break-all}
+.contact .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.contact .btn.primary{background:var(--blue)}
+.copy{background:transparent;color:var(--paper);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--paper) 35%,transparent)}
+.contact small{color:color-mix(in srgb,var(--paper) 65%,transparent);font-size:13px}
+:root[data-theme="dark"] .contact, :root:not([data-theme="light"]) .contact{}
+footer{padding-block:28px 40px;border-top:1px solid var(--line);font-size:13px;color:var(--ink3)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (prefers-reduced-motion:no-preference){.tie{animation:rise .6s ease-out both}@keyframes rise{from{transform:translateY(8px)}to{transform:none}}}
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Tieout home">
+      <svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true"><polyline points="8,30 26,48 56,14" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="26" cy="48" r="9" fill="#2a78d6" stroke="var(--paper)" stroke-width="3"/></svg>
+      <b>tie<span>out</span></b>
+    </a>
+    <a class="navcta" href="#start">Book a health-check</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">For Sage 200 companies in Northern Ireland &amp; Ireland</span>
+        <h1>Your numbers, owned by you, <em>tied to your trial balance.</em></h1>
+        <p class="lede">Tieout takes the data already sitting in Sage&nbsp;200 and turns it into a month-end board pack, an Excel pack with live formulas, and a dashboard on your phone. Every figure is checked against your ledger every night.</p>
+        <div class="ctas">
+          <a class="btn primary" href="#start">Book a reporting health-check</a>
+          <a class="btn ghost" href="#what">See what you get</a>
+        </div>
+      </div>
+
+      <figure class="tie" aria-label="Example of a nightly reconciliation">
+        <div class="tie-head"><span class="t">Nightly tie-out · August</span><span class="d">Demo data</span></div>
+        <table>
+          <tr><td>Sales invoices posted<span class="s">SOP documents, all branches</span></td><td class="v">£1,400,398.86</td></tr>
+          <tr><td>Sales nominal (4000–4999)<span class="s">General ledger</span></td><td class="v">£1,400,398.86</td></tr>
+          <tr class="diff"><td>Difference</td><td class="v">£0.00</td></tr>
+        </table>
+        <div class="tie-foot"><span class="pill">✓ Ties to the trial balance</span><span>Checked 02:14 · 200 of 200 checks passed</span></div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="band alt" id="problem">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Why this exists</span>
+        <h2>Sage 200 holds the right numbers. Getting them out is the hard part.</h2>
+      </div>
+      <div class="quotes">
+        <div class="q"><p>Drill-down from a report to the transactions behind it.</p><small>The most-voted request on Sage's own ideas portal for Sage&nbsp;200. Open since 2023.</small></div>
+        <div class="q"><p>Consolidating companies means the same base currency and chart of accounts.</p><small>Sage 200 help, on built-in consolidation. NI + ROI groups do it in Excel.</small></div>
+        <div class="q"><p>Month-end packs rebuilt by hand, from exports, every month.</p><small>Exports into Excel, reformatted into PowerPoint, checked by hand. Every month.</small></div>
+      </div>
+      <div class="facts">
+        <div class="fact"><span class="n">47%</span><p>of SMEs on the island of Ireland are unsure of their own profit margin, up from 10% in 2019. <span class="note">InterTradeIreland Business Monitor, Q2 2026.</span></p></div>
+        <div class="fact"><span class="n">0</span><p>new reporting features in the Sage 200 2025&nbsp;R2 and 2026&nbsp;R1 release notes.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="what">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">What you get</span>
+        <h2>The reports your finance team already makes, built once and kept up to date.</h2>
+      </div>
+      <div class="outputs">
+        <div class="olist">
+          <div class="o"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/></svg><div><h3>A board pack that updates through the month</h3><p>PDF and Word. Month-to-date from day one, with a run-rate projection and commentary drafted for you, then closed off at month end.</p></div></div>
+          <div class="o"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 10h18M9 4v16M15 4v16"/></svg><div><h3>An Excel pack with live formulas</h3><p>P&amp;L, trial balance, aged debtors and stock, all as formulas over the data. Your team can click any number and see where it came from.</p></div></div>
+          <div class="o"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M10 18h4"/></svg><div><h3>A dashboard on your phone</h3><p>Branch margin, stock turn, dead stock and debtors, with the exceptions first: the customers losing you money and the accounts over 90 days.</p></div></div>
+          <div class="o"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><div><h3>A Power BI model, ready to use</h3><p>The same measures, already defined, so anyone who builds their own reports gets the same answers as the board pack.</p></div></div>
+          <div class="o"><svg width="22" height="22" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="8,30 26,48 56,14"/></svg><div><h3>A nightly reconciliation</h3><p>Sales, cost of sales, debtors and every journal checked against the ledger. If something doesn't tie, you hear about it before the board does.</p></div></div>
+        </div>
+        <div class="shots">
+          <figure class="shot"><img src="img/boardpack.jpg" alt="Board pack executive summary: month-to-date sales, margin, projection and commentary" width="900" height="1272" loading="lazy"><figcaption>Board pack, month to date. Demo data for a fictional builders' merchant.</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="how">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">How it works</span>
+        <h2>Your data stays yours, and it never leaves in a form you haven't approved.</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><span class="k">Your IT</span><h3>Read-only login</h3><p>Your IT or partner creates a login that can read Sage&nbsp;200 and change nothing.</p></div>
+        <div class="step"><span class="k">Nightly</span><h3>A small collector</h3><p>Runs on your own server overnight. It only sends data out, over an encrypted connection, and nothing can connect in.</p></div>
+        <div class="step"><span class="k">Your account</span><h3>Your warehouse</h3><p>Data lands in a Snowflake account in your company's name, hosted in Dublin, for about £25 a month.</p></div>
+        <div class="step"><span class="k">Every morning</span><h3>Reports that tie</h3><p>The model, the reconciliation, the board pack, Excel and dashboard, refreshed before you start work.</p></div>
+      </div>
+      <div class="keep">
+        <div><h3>What you keep</h3><ul><li>The warehouse, the model and every report, in your name</li><li>Your reporting when you upgrade Sage or move to Intacct</li><li>The right to switch it off whenever you like</li></ul></div>
+        <div><h3>What never leaves your building</h3><ul><li>Customer and supplier contacts, addresses and bank details</li><li>Payroll and employee records</li><li>Anything not on the list your IT signs off</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="start">
+    <div class="wrap offer">
+      <div class="sec-head" style="margin-bottom:0">
+        <span class="eyebrow">Where to start</span>
+        <h2>A ten-day reporting health-check.</h2>
+        <p class="lede">You find out what's in your Sage 200 data and what it could tell you, and you pay for nothing else until you've seen it working on your own numbers.</p>
+      </div>
+      <div class="price">
+        <span class="free">Free for the first three NI Sage 200 companies</span>
+        <div class="amt">£1,250 <small>fixed, ex VAT</small></div>
+        <ol>
+          <li>A map of your data sources: Sage, payroll, budgets, anything else</li>
+          <li>A data-quality memo: duplicates, missing VAT numbers, unreconciled periods</li>
+          <li>One working dashboard on your real data</li>
+          <li>A tie-out of your ledgers to the trial balance</li>
+          <li>A fixed quote for the full build</li>
+        </ol>
+        <p class="note">After that, a one-off build and a monthly fee that covers the board pack, Excel, dashboard and reconciliation. ROI companies can often part-fund it with the LEO Grow Digital Voucher.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="about">
+    <div class="wrap about">
+      <div class="sec-head" style="margin-bottom:0">
+        <span class="eyebrow">Who's behind it</span>
+        <h2>Thomas Mullan</h2>
+        <p>Data engineer, Belfast</p>
+      </div>
+      <div>
+        <p>I build data platforms for a living: the pipelines, warehouses and models that turn raw system data into numbers a business can run on. Tieout brings that same engineering to Sage 200 companies that don't have a data team of their own.</p>
+        <p>I'm not a Sage reseller and I don't replace your accountant or your partner. I build the layer above Sage and hand it over, so you can see how every number was made.</p>
+        <div class="contact" style="margin-top:28px">
+          <h3>Talk to me</h3>
+          <span class="addr" id="addr">thomas@tieout.co.uk</span>
+          <div class="row">
+            <a class="btn primary" href="mailto:thomas@tieout.co.uk?subject=Reporting%20health-check">Email me</a>
+            <button class="btn copy" type="button" id="copybtn">Copy address</button>
+            <span id="copied" aria-live="polite" style="font-size:13px"></span>
+          </div>
+          <small>07841 668491 · Based in Belfast · working across NI and Ireland</small>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 Tieout · tieout.co.uk</span><span>Screenshots show demo data for a fictional company.</span></div>
+</footer>
+
+<script>
+(function(){
+  var b=document.getElementById('copybtn'), out=document.getElementById('copied'), a=document.getElementById('addr');
+  if(!b) return;
+  b.addEventListener('click', function(){
+    var t=a.textContent.trim();
+    function sel(){var r=document.createRange();r.selectNodeContents(a);var s=getSelection();s.removeAllRanges();s.addRange(r);out.textContent='Selected. Press Ctrl+C.';}
+    try{ navigator.clipboard.writeText(t).then(function(){out.textContent='Copied';}, sel); }catch(e){ sel(); }
+  });
+})();
+</script>
+
+</body>
+</html>
