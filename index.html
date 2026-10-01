@@ -6,6 +6,21 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <title>Tieout</title>
 <meta name="description" content="Tieout builds reporting foundations for Sage 200 companies in Northern Ireland and Ireland: board packs, Excel and dashboards that tie to your trial balance, from a warehouse you own.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tieout">
+<meta property="og:title" content="Tieout: Sage 200 reporting that ties to your trial balance">
+<meta property="og:description" content="Board packs, Excel and dashboards from a warehouse you own. Watch the film or try the live demo.">
+<meta property="og:url" content="https://tieout.co.uk/">
+<meta property="og:image" content="https://tieout.co.uk/assets/film-poster.png">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="1080">
+<meta property="og:video" content="https://tieout.co.uk/assets/tieout-film.mp4">
+<meta property="og:video:secure_url" content="https://tieout.co.uk/assets/tieout-film.mp4">
+<meta property="og:video:type" content="video/mp4">
+<meta property="og:video:width" content="1920">
+<meta property="og:video:height" content="1080">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tieout.co.uk/assets/film-poster.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -62,6 +77,29 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background
 .btn.primary:hover{background:var(--blue-ink);color:#fff}
 .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
 .btn.ghost:hover{box-shadow:inset 0 0 0 1.5px var(--ink3)}
+
+.navr{display:flex;align-items:center;gap:10px}
+.navcta.demo{background:var(--blue);color:#fff}
+.navcta.demo:hover{background:var(--blue-ink)}
+@media (max-width:560px){.navcta.book{display:none}}
+.btn.demo{background:var(--blue);color:#fff;font-size:17px;padding:14px 26px;box-shadow:0 10px 24px -12px var(--blue)}
+.btn.demo:hover{background:var(--blue-ink);color:#fff}
+.btn.demo svg{flex:none}
+
+/* film */
+.film{max-width:960px;margin-inline:auto}
+.film video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#000;border-radius:14px;border:1px solid var(--line);box-shadow:0 18px 40px -24px rgba(15,17,18,.35)}
+.film p{margin-top:12px}
+
+/* health-check */
+.hc{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:start}
+@media (max-width:860px){.hc{grid-template-columns:1fr}}
+.hc .guar{font-size:18px;font-weight:600;letter-spacing:-.01em;line-height:1.4;border-left:3px solid var(--blue);padding-left:16px;margin-top:6px}
+.hc ul{margin:0;padding:0;list-style:none}
+.hc li{display:grid;grid-template-columns:24px 1fr;gap:10px;padding-block:11px;border-bottom:1px solid var(--line);color:var(--ink2);font-size:16px}
+.hc li:first-child{padding-top:0}
+.hc li svg{margin-top:4px;color:var(--good)}
+.hc .btn.primary{align-self:flex-start}
 
 /* tie-out card: the thesis */
 .tie{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 22px 18px;box-shadow:0 18px 40px -24px rgba(15,17,18,.35)}
@@ -161,7 +199,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true"><polyline points="8,30 26,48 56,14" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="26" cy="48" r="9" fill="#2a78d6" stroke="var(--paper)" stroke-width="3"/></svg>
       <b>tie<span>out</span></b>
     </a>
-    <a class="navcta" href="#start">Book a health-check</a>
+    <div class="navr">
+      <a class="navcta book" href="#health-check" style="background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)">Health-check</a>
+      <!-- TODO: switch to https://app.tieout.co.uk once that hostname resolves (it did not when this was written; the fly.dev URL is the working fallback). Also update the hero button below. -->
+      <a class="navcta demo" href="https://tieout-demo.fly.dev" target="_blank" rel="noopener">Try the live demo</a>
+    </div>
   </div>
 </header>
 
@@ -173,7 +215,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <h1>Your numbers, owned by you, <em>tied to your trial balance.</em></h1>
         <p class="lede">Tieout takes the data already sitting in Sage&nbsp;200 and turns it into a month-end board pack, an Excel pack with live formulas, and a dashboard on your phone. Every figure is checked against your ledger every night.</p>
         <div class="ctas">
-          <a class="btn primary" href="#start">Book a reporting health-check</a>
+          <!-- TODO: switch to https://app.tieout.co.uk once that hostname resolves (fly.dev is the fallback for now). -->
+          <a class="btn demo" href="https://tieout-demo.fly.dev" target="_blank" rel="noopener">Try the live demo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <a class="btn ghost" href="#health-check">Book a health-check</a>
           <a class="btn ghost" href="#what">See what you get</a>
         </div>
       </div>
@@ -187,6 +231,45 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         </table>
         <div class="tie-foot"><span class="pill">✓ Ties to the trial balance</span><span>Checked 02:14 · 200 of 200 checks passed</span></div>
       </figure>
+    </div>
+  </section>
+
+  <section class="band" id="film" style="padding-block:56px">
+    <div class="wrap film">
+      <div class="sec-head" style="margin-bottom:24px">
+        <span class="eyebrow">See it working</span>
+        <h2>From Sage 200 to a board pack that ties, in 73 seconds.</h2>
+      </div>
+      <video controls playsinline preload="metadata" poster="assets/film-poster.png" aria-label="Tieout product film">
+        <source src="assets/tieout-film.mp4" type="video/mp4">
+        Your browser can't play this video. <a href="assets/tieout-film.mp4">Download the film</a>.
+      </video>
+      <p class="note">Demo data for a fictional builders' merchant.</p>
+    </div>
+  </section>
+
+  <section class="band alt" id="health-check">
+    <div class="wrap hc">
+      <div class="sec-head" style="margin-bottom:0">
+        <span class="eyebrow">Health-check</span>
+        <h2>Sage 200 Margin &amp; Cash Health-Check</h2>
+        <p class="lede">£950 fixed, 2&ndash;3 weeks, read-only on your own data.</p>
+        <p class="guar">If it doesn't find at least £10k you didn't know about, you don't pay.</p>
+        <p class="note">Credited against your first three months if you subscribe.</p>
+      </div>
+      <div class="price">
+        <h3>What it covers</h3>
+        <ul>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l5 5 11-11"/></svg><span>True margin after discounts, by customer and by rep</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l5 5 11-11"/></svg><span>Duplicate supplier invoices</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l5 5 11-11"/></svg><span>GRNI (goods received not invoiced) over 90 days</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l5 5 11-11"/></svg><span>Journals posted after period close</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l5 5 11-11"/></svg><span>Unallocated cash</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l5 5 11-11"/></svg><span>The low point of your 13-week cash forecast</span></li>
+        </ul>
+        <a class="btn primary" href="mailto:thomas@tieout.co.uk?subject=Health-check">Book a 20-minute call</a>
+        <p class="note">Or phone <a href="tel:+447841668491">07841 668491</a>.</p>
+      </div>
     </div>
   </section>
 
@@ -220,6 +303,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           <div class="o"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 10h18M9 4v16M15 4v16"/></svg><div><h3>An Excel pack with live formulas</h3><p>P&amp;L, trial balance, aged debtors and stock, all as formulas over the data. Your team can click any number and see where it came from.</p></div></div>
           <div class="o"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M10 18h4"/></svg><div><h3>A dashboard on your phone</h3><p>Branch margin, stock turn, dead stock and debtors, with the exceptions first: the customers losing you money and the accounts over 90 days.</p></div></div>
           <div class="o"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><div><h3>A Power BI model, ready to use</h3><p>The same measures, already defined, so anyone who builds their own reports gets the same answers as the board pack.</p></div></div>
+          <div class="o"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 7h14M5 7l-2.5 6a3 3 0 0 0 5 0zM19 7l-2.5 6a3 3 0 0 0 5 0z"/></svg><div><h3>Balance sheet</h3><p>Proves itself: every control account ties to its sub-ledger, so you can see the debtors, creditors and stock figures agree before you rely on them.</p></div></div>
+          <div class="o"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16M4 10h16M4 15h10M4 20h6"/></svg><div><h3>Trial balance</h3><p>Flags the accounts that need a look, and exports in the format your accountant expects.</p></div></div>
           <div class="o"><svg width="22" height="22" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="8,30 26,48 56,14"/></svg><div><h3>A nightly reconciliation</h3><p>Sales, cost of sales, debtors and every journal checked against the ledger. If something doesn't tie, you hear about it before the board does.</p></div></div>
         </div>
         <div class="shots">
